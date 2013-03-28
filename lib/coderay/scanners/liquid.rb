@@ -32,7 +32,6 @@ module Scanners
     def scan_selector(encoder, options, match)
       scan_spaces(encoder)
       if match = scan(/in|with/)
-        Rails.logger.debug 'DEBUG: Scanning selector'
         scan_spaces(encoder)
         encoder.text_token match, :type
         if delimiter = scan(/:/)
@@ -47,7 +46,6 @@ module Scanners
     end
 
     def scan_directive(encoder, options, match)
-      Rails.logger.debug 'DEBUG: Scanning directive'
       encoder.text_token match, :key
       state = :liquid
       scan_spaces(encoder)
@@ -97,7 +95,6 @@ module Scanners
     end
 
     def scan_output(encoder, options, match)
-      Rails.logger.debug 'DEBUG: Scanning output'
       encoder.text_token match, :key
       state = :liquid
       scan_spaces(encoder)
@@ -115,7 +112,6 @@ module Scanners
     end
 
     def scan_tokens(encoder, options)
-      Rails.logger.debug "DEBUG: Scan started: #{self.string}"
       state = :initial
 
       until eos?
